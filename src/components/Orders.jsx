@@ -1,6 +1,8 @@
-import React from 'react';
+import useOrders from '../hooks/useOrders';
 
 const Orders = () => {
+  const orders = useOrders();
+  console.log(orders);
   return (
     <aside>
       <div className='empty'>
