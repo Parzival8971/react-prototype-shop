@@ -140,11 +140,13 @@ const AppStateProvider = ({ children }) => {
   const addToOrder = useCallback((id) => {
     setOrders((orders) => {
       const finded = orders.find((order) => order.id === id);
+      console.log(finded);
       if (finded === undefined) {
         return [...orders, { id, quantity: 1 }];
       } else {
         return orders.map((order) => {
           if (order.id === id) {
+            console.log(order.quantity);
             return {
               id,
               quantity: order.quantity + 1,
@@ -156,8 +158,14 @@ const AppStateProvider = ({ children }) => {
       }
     });
   }, []);
-  const remove = useCallback((id) => {}, []);
-  const removeAll = useCallback(() => {}, []);
+  const remove = useCallback((id) => {
+    setOrders((orders) => {
+      return orders.filter((order) => order.id !== id);
+    });
+  }, []);
+  const removeAll = useCallback(() => {
+    setOrders([]);
+  }, []);
 
   return (
     <AppStateContext.Provider
